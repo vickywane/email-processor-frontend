@@ -1,15 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { firebaseApp } from "@/app/page";
+import { firebaseApp } from "@/utils/firebase";
 import {
   getAuth,
   signInWithEmailAndPassword,
   setPersistence,
-  inMemoryPersistence,
-
-  browserLocalPersistence
+  browserLocalPersistence,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
+
 import Link from "next/link";
 
 export default function Login() {
@@ -33,6 +34,22 @@ export default function Login() {
     }
   };
 
+  const authWithGoogle = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth(firebaseApp);
+      const provider = new GoogleAuthProvider();
+
+      await setPersistence(auth, browserLocalPersistence);
+      await signInWithPopup(auth, provider);
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <br />
@@ -47,7 +64,7 @@ export default function Login() {
       <div className="max-w-sm mx-auto">
         <div className="w-full">
           <button
-            onClick={createAccount}
+            onClick={authWithGoogle}
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
           >
@@ -98,7 +115,7 @@ export default function Login() {
         </div>
 
         <div className="mb-5 flex flex-row justify-between">
-          <p className="text-gray-500">Don't have an account?</p>
+          <p className="text-gray-500">Dont have an account?</p>
 
           <Link href={"/"}>
             <p>Create Account </p>

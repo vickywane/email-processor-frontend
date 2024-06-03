@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { firebaseApp } from "@/app/page";
+import { firebaseApp } from "@/utils/firebase";
 import { getAuth } from "firebase/auth";
 import { AxiosClient } from "@/utils/AxiosClient";
 import IntegrationCard from "./IntegrationCard";
