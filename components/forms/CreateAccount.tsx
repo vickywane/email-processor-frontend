@@ -7,6 +7,8 @@ import {
   getAuth,
   setPersistence,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import Link from "next/link";
 
@@ -31,6 +33,32 @@ export default function CreateAccount() {
     }
   };
 
+  const authWithGoogle = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth(firebaseApp);
+      const provider = new GoogleAuthProvider();
+
+      await setPersistence(auth, browserLocalPersistence);
+      await signInWithPopup(auth, provider);
+
+      // const signInResult = await signInWithPopup(auth, provider);
+      // const result = signInResult;
+
+      // const credential = GoogleAuthProvider.credentialFromResult(signInResult);
+      // const token = credential?.accessToken;
+      // The signed-in user info.
+      // const user = result.user;
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+
+      // const credential = GoogleAuthProvider.credentialFromError(error);
+    }
+  };
+
   return (
     <div>
       <br />
@@ -45,7 +73,7 @@ export default function CreateAccount() {
       <div className="max-w-sm mx-auto">
         <div className="w-full">
           <button
-            onClick={createAccount}
+            onClick={authWithGoogle}
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
           >
