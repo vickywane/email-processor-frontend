@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { firebaseApp } from "@/app/page";
+import { firebaseApp } from "@/utils/firebase";
 import {
   getAuth,
   signInWithEmailAndPassword,
