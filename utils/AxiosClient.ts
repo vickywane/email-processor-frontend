@@ -28,6 +28,6 @@ export const AxiosClient = async ({
 
     return request;
   } catch (error) {
-    console.error(`Error`);
+    throw new Error(error.message)
   }
 };

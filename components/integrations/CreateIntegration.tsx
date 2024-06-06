@@ -8,7 +8,7 @@ import cn from "classnames";
 
 const AVAILABLE_LABELS = [
   "Date Applied",
-  "Job Name",
+  "Job Role",
   "Description",
   "Link",
   "Status",
