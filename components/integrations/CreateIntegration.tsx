@@ -21,7 +21,11 @@ const CreateIntegration = () => {
   const [selectedLabels, setSelectedLabels] = useState<[] | string[]>([]);
 
   const authInstance = getAuth(firebaseApp);
-  authInstance?.onAuthStateChanged((user) => setAuthToken(user?.accessToken));
+  authInstance?.onAuthStateChanged((user) => {
+    console.log("AUTH STATE CHANGED =>", user)
+
+    setAuthToken(user?.accessToken)
+  });
 
   const router = useRouter();
 
