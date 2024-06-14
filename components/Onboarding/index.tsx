@@ -17,7 +17,11 @@ const Onboarding = () => {
     }
   }, [authToken]);
 
-  authInstance?.onAuthStateChanged((user) => setAuthToken(user?.accessToken));
+  authInstance?.onAuthStateChanged((user) => {
+    // console.log("AUTH STATE CHANGED =>", user?.accessToken)
+  
+    setAuthToken(user?.accessToken)
+  });
 
   const getUserData = async () => {
     const request = await AxiosClient({
