@@ -131,7 +131,7 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
 
               <tbody>
                 {document?.data?.map((item, index) => (
-                  <tr className="bg-white border-b">
+                  <tr key={index} className="bg-white border-b">
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
