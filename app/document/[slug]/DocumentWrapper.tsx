@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/buttons";
+import IntegrationLabel from "@/components/labels/IntegrationLabel";
 import { AxiosClient } from "@/utils/AxiosClient";
 import { firebaseApp } from "@/utils/firebase";
 import { getAuth } from "firebase/auth";
@@ -69,7 +70,15 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
     <div className="max-w-[1100px] m-auto">
       <div className="flex flex-row justify-between my-4 ">
         <div className="flex items-center">
-          <h1 className="text-2xl capitalize">{formatTitle(docName)}</h1>
+          <div className="flex flex-row">
+            <div>
+              <h1 className="text-2xl capitalize">{formatTitle(docName)}</h1>
+            </div>
+
+            <div className="ml-4 flex items-center">
+              <IntegrationLabel label="google-spreadsheet" />
+            </div>
+          </div>
         </div>
 
         <div>
@@ -87,7 +96,24 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
 
       {!document ? (
         <div>
-          <p>Loading data in document</p>
+          <h1 className="tex-xl text-center">
+            Loading tracked application from{" "}
+            <span className="font-semibold capitalize">
+              {" "}
+              {formatTitle(docName)}{" "}
+            </span>{" "}
+            document.
+          </h1>
+        </div>
+      ) : document?.data?.length === 0 ? (
+        <div>
+          <h1 className="tex-xl text-center">
+            <span className="font-semibold capitalize">
+              {" "}
+              {formatTitle(docName)}{" "}
+            </span>{" "}
+            document has no tracked applications.
+          </h1>
         </div>
       ) : (
         <div>

@@ -15,7 +15,7 @@ const ProfileHero = () => {
   const handleLogout = async () => {
     try {
       await authInstance.signOut();
-      router.push("/authenticate");
+      router.push("/auth/sign-in");
     } catch (error) {
       console.error("Failed to log out", error);
     }

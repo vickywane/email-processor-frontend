@@ -14,13 +14,13 @@ import Header from "@/components/header";
 const Page = async () => {
   return (
     <div>
-      <div>
+      {/* <div>
         <Header />
 
         <br />
 
         <CreateIntegration />
-      </div>
+      </div> */}
     </div>
   );
 };

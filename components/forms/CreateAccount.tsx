@@ -27,7 +27,7 @@ export default function CreateAccount() {
       await setPersistence(auth, browserLocalPersistence);
       await createUserWithEmailAndPassword(auth, email, password);
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error("Failed to create account", error);
     }
@@ -43,19 +43,9 @@ export default function CreateAccount() {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithPopup(auth, provider);
 
-      // const signInResult = await signInWithPopup(auth, provider);
-      // const result = signInResult;
-
-      // const credential = GoogleAuthProvider.credentialFromResult(signInResult);
-      // const token = credential?.accessToken;
-      // The signed-in user info.
-      // const user = result.user;
-
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error(error);
-
-      // const credential = GoogleAuthProvider.credentialFromError(error);
     }
   };
 

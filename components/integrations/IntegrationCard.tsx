@@ -9,6 +9,7 @@ import cn from "classnames";
 import { IoIosSync } from "react-icons/io";
 import Button from "@/components/buttons";
 import Link from "next/link";
+import IntegrationLabel from "../labels/IntegrationLabel";
 
 const formatDocumentName = (name: string) => {
   const joined = name.split(" ").join("-");
@@ -73,20 +74,26 @@ const IntegrationCard = ({ integration }) => {
 
       <div className="p-6">
         <div className="flex flex-row justify-between">
-          <div>
-            <Link
-              href={`/document/${formatDocumentName(
-                integration?.documentName
-              )}`}
-            >
-              <p className="text-2xl font-medium">
-                {integration?.documentName}{" "}
-              </p>
-            </Link>
+          <div className="flex flex-row" >
+            <div>
+              <Link
+                href={`/document/${formatDocumentName(
+                  integration?.documentName
+                )}`}
+              >
+                <p className="text-2xl font-medium">
+                  {integration?.documentName}{" "}
+                </p>
+              </Link>
 
-            <p className="text-medium pt-2">
-              {new Date(integration?.dateCreated).toDateString()}
-            </p>
+              <p className="text-medium pt-2">
+                {new Date(integration?.dateCreated).toDateString()}
+              </p>
+            </div>
+
+            <div className="ml-4" >
+                <IntegrationLabel label={integration?.integrationType[0]} />
+            </div>
           </div>
 
           <div>

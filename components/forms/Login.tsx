@@ -28,7 +28,7 @@ export default function Login() {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +44,7 @@ export default function Login() {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithPopup(auth, provider);
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

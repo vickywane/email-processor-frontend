@@ -7,7 +7,7 @@ const Header = () => {
       <nav className="flex h-[60px] w-full">
         <div className="flex items-center w-full justify-between px-8">
           <div>
-            <Link href={"/dashboard"}>
+            <Link href={"/"}>
               <p className="text-xl font-semibold">
                 {" "}
                 Email Application Tracker{" "}

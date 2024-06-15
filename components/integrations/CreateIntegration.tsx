@@ -96,8 +96,6 @@ const CreateIntegration = () => {
         </div>
       </div>
 
-      {/* {integrations && ( */}
-
       <br />
       <div>
         <button
@@ -108,7 +106,6 @@ const CreateIntegration = () => {
           Create Integration
         </button>
       </div>
-      {/* )} */}
 
       <br />
     </div>
