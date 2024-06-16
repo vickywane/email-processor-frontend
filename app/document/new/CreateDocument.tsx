@@ -15,10 +15,10 @@ const AVAILABLE_LABELS = [
   "Company Name"
 ];
 
-const CreateIntegration = () => {
+const CreateDocument = () => {
   const [documentName, setDocumentName] = useState("");
   const [authToken, setAuthToken] = useState<null | "">(null);
-  const [selectedLabels, setSelectedLabels] = useState<[] | string[]>([]);
+  const [selectedLabels, setSelectedLabels] = useState<[] | string[]>(["Date Applied"]);
 
   const authInstance = getAuth(firebaseApp);
   authInstance?.onAuthStateChanged((user) => setAuthToken(user?.accessToken));
@@ -27,7 +27,7 @@ const CreateIntegration = () => {
 
   const startIntegration = async () => {
     await AxiosClient({
-      endpoint: "integrate",
+      endpoint: "v1/document",
       method: "POST",
       authToken,
       body: {
@@ -36,7 +36,7 @@ const CreateIntegration = () => {
       },
     });
 
-    router.push("/dashboard");
+    router.push("/");
   };
 
   const selectLabel = (label: string) => {
@@ -112,4 +112,4 @@ const CreateIntegration = () => {
   );
 };
 
-export default CreateIntegration;
+export default CreateDocument;

@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/buttons";
 import IntegrationLabel from "@/components/labels/IntegrationLabel";
+import SkeletonLoader from "@/components/ui/SkeletonLoader";
 import { AxiosClient } from "@/utils/AxiosClient";
 import { firebaseApp } from "@/utils/firebase";
 import { getAuth } from "firebase/auth";
@@ -27,7 +28,7 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
 
   const getDocumentData = async (slug: string) => {
     const request = await AxiosClient({
-      endpoint: `document?slug=${slug}`,
+      endpoint: `v1/document?slug=${slug}`,
       authToken,
     });
 
@@ -67,7 +68,7 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
   };
 
   return (
-    <div className="max-w-[1100px] m-auto">
+    <div>
       <div className="flex flex-row justify-between my-4 ">
         <div className="flex items-center">
           <div className="flex flex-row">
@@ -95,16 +96,7 @@ const DocumentWrapper = ({ docName }: { docName: string }) => {
       <br />
 
       {!document ? (
-        <div>
-          <h1 className="tex-xl text-center">
-            Loading tracked application from{" "}
-            <span className="font-semibold capitalize">
-              {" "}
-              {formatTitle(docName)}{" "}
-            </span>{" "}
-            document.
-          </h1>
-        </div>
+        <SkeletonLoader />
       ) : document?.data?.length === 0 ? (
         <div>
           <h1 className="tex-xl text-center">

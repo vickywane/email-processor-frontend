@@ -10,7 +10,7 @@ interface IntegrationLabelProps {
   documentLink?: string;
 }
 
-const dynamicLabel = (label: string) => {
+const dynamicLabel = (label: string, documentLink?: string) => {
   switch (label) {
     case "google-spreadsheet":
       return (
@@ -20,9 +20,20 @@ const dynamicLabel = (label: string) => {
               {extractHyphensFromText(label)}
             </p>
 
-            <div className="ml-1">
-              <IoIosLink color="white" fontSize={18} />
-            </div>
+            {documentLink && (
+              <div className="ml-1">
+                <IoIosLink color="white" fontSize={18} />
+              </div>
+            )}
+          </div>
+        </div>
+      );
+
+    case "google.com":
+      return (
+        <div>
+          <div className="flex flex-row bg-[green] hover:cursor-pointer rounded-full px-4 py-2">
+            <p className="text-sm text-white capitalize">Google</p>
           </div>
         </div>
       );
@@ -37,9 +48,15 @@ const dynamicLabel = (label: string) => {
 
 const IntegrationLabel = ({ label, documentLink }: IntegrationLabelProps) => {
   return (
-    <a href={documentLink || "#"} target="_blank">
-      {dynamicLabel(label)}
-    </a>
+    <div>
+      {documentLink ? (
+        <a href={documentLink || "#"} target="_blank">
+          {dynamicLabel(label)}
+        </a>
+      ) : (
+        dynamicLabel(label)
+      )}
+    </div>
   );
 };
 

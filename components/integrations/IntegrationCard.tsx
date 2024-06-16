@@ -30,7 +30,7 @@ const IntegrationCard = ({ integration }) => {
 
     try {
       const syncRequest = await AxiosClient({
-        endpoint: "sync",
+        endpoint: "v1/document/sync",
         method: "POST",
         authToken,
         body: {
