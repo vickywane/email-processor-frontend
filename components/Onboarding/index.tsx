@@ -81,7 +81,7 @@ const Onboarding = () => {
       )}
 
       {userData?.data?.map(
-        (integration) => integration.provider === "google" && <Integrations />
+        (integration, idx) => integration.provider === "google" && <Integrations key={idx} />
       )}
     </div>
   );
