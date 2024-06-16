@@ -1,10 +1,17 @@
+import Onboarding from "@/components/Onboarding";
 import Header from "@/components/header";
-import CreateAccount from "../components/forms/CreateAccount";
+import Integrations from "@/components/integrations";
 
 export default function Home() {
   return (
-    <div>      
-      <CreateAccount />
+    <div>
+      <Header />
+
+      <div className="max-w-[1200px] m-auto" >
+        <br />
+
+        <Onboarding />
+      </div>
     </div>
   );
 }

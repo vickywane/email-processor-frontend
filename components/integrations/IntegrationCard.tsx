@@ -6,6 +6,16 @@ import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { timeSince } from "@/utils/timeFormat";
 import cn from "classnames";
+import { IoIosSync } from "react-icons/io";
+import Button from "@/components/buttons";
+import Link from "next/link";
+import IntegrationLabel from "../labels/IntegrationLabel";
+
+const formatDocumentName = (name: string) => {
+  const joined = name.split(" ").join("-");
+
+  return joined.toLowerCase();
+};
 
 const IntegrationCard = ({ integration }) => {
   const [authToken, setAuthToken] = useState(null);
@@ -20,7 +30,7 @@ const IntegrationCard = ({ integration }) => {
 
     try {
       const syncRequest = await AxiosClient({
-        endpoint: "sync",
+        endpoint: "v1/document/sync",
         method: "POST",
         authToken,
         body: {
@@ -43,7 +53,7 @@ const IntegrationCard = ({ integration }) => {
 
       setTimeout(() => {
         setSyncResult({ status: "", message: "" });
-      }, 6000);
+      }, 10000);
     }
   };
 
@@ -64,24 +74,34 @@ const IntegrationCard = ({ integration }) => {
 
       <div className="p-6">
         <div className="flex flex-row justify-between">
-          <div>
-            <p className="text-2xl font-medium">
-              {" "}
-              {integration?.documentName}{" "}
-            </p>
-            <p className="text-medium pt-2">
-              {new Date(integration?.dateCreated).toDateString()}
-            </p>
+          <div className="flex flex-row" >
+            <div>
+              <Link
+                href={`/document/${formatDocumentName(
+                  integration?.documentName
+                )}`}
+              >
+                <p className="text-2xl font-medium">
+                  {integration?.documentName}{" "}
+                </p>
+              </Link>
+
+              <p className="text-medium pt-2">
+                {new Date(integration?.dateCreated).toDateString()}
+              </p>
+            </div>
+
+            <div className="ml-4" >
+                <IntegrationLabel label={integration?.integrationType[0]} />
+            </div>
           </div>
 
           <div>
-            <button
-              onClick={() => handleDataSync(integration?.documentId)}
-              type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-            >
-              {isLoading ? "Syncing" : "Sync"} Data
-            </button>
+            <Button
+              icon={<IoIosSync size={24} />}
+              text={isLoading ? "Syncing" : "Sync"}
+              clickAction={() => handleDataSync(integration?.documentId)}
+            />
 
             {!isLoading && (
               <p className="text-center capitalize mt-4 text-sm">

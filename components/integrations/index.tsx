@@ -4,6 +4,8 @@ import { firebaseApp } from "@/utils/firebase";
 import { getAuth } from "firebase/auth";
 import { AxiosClient } from "@/utils/AxiosClient";
 import IntegrationCard from "./IntegrationCard";
+import { FiPlus } from "react-icons/fi";
+
 import Link from "next/link";
 
 const Integrations = () => {
@@ -32,29 +34,31 @@ const Integrations = () => {
 
   return (
     <div>
-      {/* {integrations && ( */}
       <div className="flex flex-row justify-between">
-        <div className="flex items-center" >
+        <div className="flex items-center">
           <p className="text-xl">All Tracked Documents</p>
         </div>
 
-        <Link href={"/new-document"}>
+        <Link href={"/document/new"}>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
+            className="text-white flex flex-row bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
           >
-            Create Integration
+            <FiPlus size={26} />
+
+            <div className="ml-2 mt-1 flex items-center">
+              <p>Create Integration</p>
+            </div>
           </button>
         </Link>
       </div>
 
-      {/* )} */}
       <br />
       <hr />
       <br />
 
       {integrationData && (
-        <ul className="flex flex-col gap-12" >
+        <ul className="flex flex-col gap-12">
           {integrationData?.integrations?.map((integration: any, idx) => {
             return (
               <li key={idx}>
@@ -65,29 +69,8 @@ const Integrations = () => {
         </ul>
       )}
 
-      {/* <div>
-          <button
-            onClick={getUserIntegrations}
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-          >
-            Refresh Integrations
-          </button>
-        </div> */}
-
       <br />
-
       <br />
-
-      {/* <div>
-          <button
-            onClick={getUserIntegrations}
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
-          >
-            Sync Data
-          </button>
-        </div> */}
     </div>
   );
 };
