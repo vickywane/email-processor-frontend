@@ -60,7 +60,7 @@ const IntegrationCard = ({ integration }) => {
   if (!integration) return null;
 
   return (
-    <div className="h-auto  border-2 w-full">
+    <div className="h-auto  border-2 w-full overflow-hidden">
       {syncResult.message && (
         <div
           className={cn(

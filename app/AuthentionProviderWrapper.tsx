@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { firebaseApp } from "@/utils/firebase";
 import { getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -11,12 +11,16 @@ const AuthenticationProviderWrapper = ({
 }) => {
   const router = useRouter();
 
-  const authInstance = getAuth(firebaseApp);
-  authInstance?.onAuthStateChanged((user) => {
-    if (!user) {
-      router.push("/auth/sign-in");
+  useEffect(() => {
+    if (window) {
+      const authInstance = getAuth(firebaseApp);
+      authInstance?.onAuthStateChanged((user) => {
+        if (!user) {
+          router.push("/auth/sign-in");
+        }
+      });
     }
-  });
+  }, []);
 
   return <div>{children}</div>;
 };
